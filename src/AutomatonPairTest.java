@@ -5,21 +5,21 @@ public class AutomatonPairTest {
 
     private Automaton A;
     private Automaton A1;
-    private BOOL CHECK;
+    private BoolSet CHECK;
 
     public AutomatonPairTest(Automaton A, Automaton A1) {
         this.A = A;
         this.A1 = A1;
     }
 
-    public AutomatonPairTest(Automaton A, Automaton A1, BOOL CHECK) {
+    public AutomatonPairTest(Automaton A, Automaton A1, BoolSet CHECK) {
         this(A, A1);
         this.CHECK = CHECK;
     }
 
     public Automaton getA() { return A; }
     public Automaton getA1() { return A1; }
-    public BOOL getCHECK() { return CHECK; }
+    public BoolSet getCHECK() { return CHECK; }
 
     @Override
     public boolean equals(Object o) {
