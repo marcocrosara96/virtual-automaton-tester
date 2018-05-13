@@ -20,11 +20,12 @@ public class EW {
         Interval A_length = LE.method(A);
         if(A_length.getJ() == -1)
             return new BoolSet(true, false);
-        if(A1_length.equals(new Interval(0,0)) || INTERSECT.method(A1, SU.method(A)).isEmpty())
+        if(A_length.equals(new Interval(0,0)) || INTERSECT.method(A1, SU.method(A)).isEmpty())
             return new BoolSet(false);
         echo("UNIQUEPATH.method(Reverse.method(" + A1 + ")) --> "+ UNIQUEPATH.method(A1));
         if(UNIQUEPATH.method(REVERSE.method(A1))){
-            echo("B = SS.method(" + REVERSE.method(A) + ", " + new Interval(0 ,0) +", " + new Interval(A1_length.getJ(), A1_length.getJ()) + ") ---> " + SS.method(A, new Interval(0 ,0), new Interval(A1_length.getJ(), A1_length.getJ())));
+            echo("B = SS.method(" + REVERSE.method(A) + ", " + new Interval(0 ,0) +", " + new Interval(A1_length.getJ(),
+                    A1_length.getJ()) + ") ---> " + SS.method(REVERSE.method(A), new Interval(0 ,0), new Interval(A1_length.getJ(), A1_length.getJ())));
             Automaton B = SS.method(REVERSE.method(A), new Interval(0 ,0), new Interval(A1_length.getJ(), A1_length.getJ()));
             echo("C = REVERSE.method(" + A1 + ".getLongestString())---> " + REVERSE.method(A1.getLongestString()));
             Automaton C = REVERSE.method(A1.getLongestString());
@@ -80,119 +81,134 @@ public class EW {
         ArrayList<AutomatonPairTest> list = new ArrayList<>();
         Automaton A; Automaton A1; BoolSet CHECK;
 
-        // TEST
+        // TEST 001
+        A = new Automaton("panda");
+        A1 = new Automaton("da");
+        CHECK = new BoolSet(true);
+        list.add(new AutomatonPairTest(A, A1, CHECK));
+        // TEST 002
         A = new Automaton("panda", "nda", "a");
         A1 = new Automaton("nda", "a");
         CHECK = new BoolSet(true, false);
         list.add(new AutomatonPairTest(A, A1, CHECK));
-        // TEST
+        // TEST 003
         A = new Automaton("panda", "anda");
         A1 = new Automaton("nda", "a");
         CHECK = new BoolSet(true);
         list.add(new AutomatonPairTest(A, A1, CHECK));
-        // TEST
+        // TEST 004
         A = new Automaton("panda", "anda", "orda");
         A1 = new Automaton("nda", "a");
         CHECK = new BoolSet(true, false);
         list.add(new AutomatonPairTest(A, A1, CHECK));
-        // TEST
+        // TEST 005
         A = new Automaton("panda", "koala");
         A1 = new Automaton("nda", "ala");
         CHECK = new BoolSet(true, false);
         list.add(new AutomatonPairTest(A, A1, CHECK));
-        // TEST
+        // TEST 006
         A = new Automaton("panda", "anda", "nda");
         A1 = new Automaton("nda");
         CHECK = new BoolSet(true);
         list.add(new AutomatonPairTest(A, A1, CHECK));
-        // TEST
+        // TEST 007
         A = new Automaton("panda", "pand", "nd");
         A1 = new Automaton("panda");
         CHECK = new BoolSet(true, false);
         list.add(new AutomatonPairTest(A, A1, CHECK));
-        // TEST
+        // TEST 008
         A = new Automaton("panda", "pand", "nd");
         A1 = new Automaton("panda", "anda", "da");
         CHECK = new BoolSet(true, false);
         list.add(new AutomatonPairTest(A, A1, CHECK));
-        // TEST
+        // TEST 009
         A = new Automaton("panda", "pand", "nd");
         A1 = new Automaton("panda", "pand", "nd", "d");
         CHECK = new BoolSet(true, false);
         list.add(new AutomatonPairTest(A, A1, CHECK));
-        // TEST
+        // TEST 010
         A = new Automaton("panda", "panda", "panda");
         A1 = new Automaton("panda");
         CHECK = new BoolSet(true);
         list.add(new AutomatonPairTest(A, A1, CHECK));
-        // TEST
+        // TEST 011
         A = new Automaton("panda", "panda", "pandapanda");
         A1 = new Automaton("panda");
         CHECK = new BoolSet(true);
         list.add(new AutomatonPairTest(A, A1, CHECK));
-        // TEST
+        // TEST 012
         A = new Automaton("panda", "panda", "pandapanda");
         A1 = new Automaton("pandapanda");
         CHECK = new BoolSet(true, false);
         list.add(new AutomatonPairTest(A, A1, CHECK));
-        // TEST
+        // TEST 013
         A = new Automaton("panda", "panda", "pandapanda");
         A1 = new Automaton("pandaprtretanda");
         CHECK = new BoolSet(false);
         list.add(new AutomatonPairTest(A, A1, CHECK));
-        // TEST
+        // TEST 014
         A = new Automaton("ordine", "ordine", "ordine");
         A1 = new Automaton("ine", "dine");
         CHECK = new BoolSet(true);
         list.add(new AutomatonPairTest(A, A1, CHECK));
-        // TEST
+        // TEST 015
         A = new Automaton("ordine", "ordine", "sordine");
         A1 = new Automaton("ine", "dine");
         CHECK = new BoolSet(true);
         list.add(new AutomatonPairTest(A, A1, CHECK));
-        // TEST
+        // TEST 016
         A = new Automaton("ordine", "ordine", "sordine");
         A1 = new Automaton("e", "e");
         CHECK = new BoolSet(true);
         list.add(new AutomatonPairTest(A, A1, CHECK));
-        // TEST
+        // TEST 017
         A = new Automaton("ordine", "ordine", "sordine");
         A1 = new Automaton("");
         CHECK = new BoolSet(true);
         list.add(new AutomatonPairTest(A, A1, CHECK));
-        // TEST
+        // TEST 018
         A = new Automaton("as*");
         A1 = new Automaton("as");
         CHECK = new BoolSet(true, false);
         list.add(new AutomatonPairTest(A, A1, CHECK));
-        // TEST
+        // TEST 019
         A = new Automaton("as");
         A1 = new Automaton("as*");
         CHECK = new BoolSet(true, false);
         list.add(new AutomatonPairTest(A, A1, CHECK));
-        // TEST
+        // TEST 020
         A = new Automaton("");
         A1 = new Automaton("e");
         CHECK = new BoolSet(false);
         list.add(new AutomatonPairTest(A, A1, CHECK));
-        // TEST
+        // TEST 021
         A = new Automaton("idea");
         A1 = new Automaton("idea");
         CHECK = new BoolSet(true);
         list.add(new AutomatonPairTest(A, A1, CHECK));
-        // TEST
+        // TEST 022
         A = new Automaton("idea2");
         A1 = new Automaton("idea");
         CHECK = new BoolSet(false);
         list.add(new AutomatonPairTest(A, A1, CHECK));
-        // TEST
+        // TEST 023
         A = new Automaton("idea", "rideva", "intrinseca");
         A1 = new Automaton("ea", "va", "ca");
         CHECK = new BoolSet(true, false);
         list.add(new AutomatonPairTest(A, A1, CHECK));
-        // TEST
+        // TEST 024
         A = new Automaton("ea", "ea", "ea");
         A1 = new Automaton("ea", "va", "ca");
+        CHECK = new BoolSet(true, false);
+        list.add(new AutomatonPairTest(A, A1, CHECK));
+        // TEST 025
+        A = new Automaton("a*");
+        A1 = new Automaton("a");
+        CHECK = new BoolSet(true, false);
+        list.add(new AutomatonPairTest(A, A1, CHECK));
+        // TEST 026
+        A = new Automaton("a");
+        A1 = new Automaton("a*");
         CHECK = new BoolSet(true, false);
         list.add(new AutomatonPairTest(A, A1, CHECK));
 
